@@ -92,7 +92,7 @@ export default function Button (props){
 }
 export function SearchButton (props){
     return(
-        <SearchBtn>
+        <SearchBtn onClick={props.onClick} type="button">
         <MdSearch/>
             <Text>
             {props.children}

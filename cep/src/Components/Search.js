@@ -1,8 +1,7 @@
 import React, {useState } from 'react'
 import styled from 'styled-components'
-import {shadow} from  '../StyleGuide/styles'
+import {color, shadow,border,anime,typography} from  '../StyleGuide/styles'
 import {SearchButton} from './Button';
-import { border } from '../StyleGuide/atoms/animations';
 import borders from '../StyleGuide/atoms/borders';
 
 const Container = styled.form`
@@ -38,7 +37,6 @@ const Search = styled.div`
     hight:100%;
     border-radius:${borders.border32};
     line-height: 25px;
-    background-color: transparent;
     border: none;
     margin: 7px 0 6px;
     padding: 0 0 0 19px;
@@ -48,20 +46,85 @@ const Search = styled.div`
     word-wrap: break-word;
     outline: none;
     -webkit-tap-highlight-color: transparent;
+    background: ${color.white}!important;
     
     
     @media(max-width: 400px) {
         
     }
     `; 
-    
+    const AdressData = styled.div`
+        display:${props => props.visible ? 'flex' : 'none' };
+        flex-direction:column;
+        background:${color.white};
+        color:${color.dark2};
+        width:100%;
+        padding:8px;
+        border-radius:${border.border8};
+        box-shadow: ${shadow};
+        ${anime.scaleUp}
+        h2{
+            margin-bottom:8px;
+            ${typography.paragraph_bold}
+        }
+        
+    `
 export default function SearchByZipCode() {
+    var zipCode = ""
+    const [cep,setcep] = useState();
+    const [logradouro,setLogradouro] = useState();
+    const [bairro,setBairro] = useState();
+    const [localidade,setLocalidade] = useState();
+    const [uf,setUf] = useState();
+    const [ddd,setDdd] = useState();
+    
+    const handleZipcode= (zipInputValue) => zipInputValue.replace("-","");
+    
+    function getZipcode(){
+        const zipInputValue = document.getElementById("zipCodeElement").value;
+        zipCode=handleZipcode(zipInputValue);
+        return(zipCode)
+    }
+    function searchAdress() {
+        const parameters ={
+            method:'GET',
+            mode:'cors',
+            cache:'default'
+        }
+        const url = `https://viacep.com.br/ws/${getZipcode()}/json/`
+
+        return fetch(url, parameters)
+        .then(response => {
+        return response.json()
+        })
+        .then((data) => {
+        if (data){
+            setcep(data.cep);
+            setLogradouro(data.logradouro);
+            setLocalidade(data.localidade);
+            setUf(data.uf);
+            setBairro(data.bairro);
+            setDdd(data.ddd)
+        }
+        })
+        .catch((error) => {
+        })
+    }
+    
     return (
         <Container>
-            <Search>
-                <Input id="ZipCodeInput" type="search" spellcheck="false" role="combobox" placeholder="Digite um CEP" aria-live="polite"></Input>
-                <SearchButton style="height:100%">Pesquisar</SearchButton>
+            <Search >
+                <Input  maxLength="9" id="zipCodeElement" type="text" spellcheck="false" role="combobox" placeholder="Digite um CEP" aria-live="polite"></Input>
+                <SearchButton onClick={()=>searchAdress()} >Pesquisar</SearchButton>
             </Search>
+            <AdressData visible={cep?true:false}>
+                <h2>Cep: {cep}</h2>
+                <h2>Rua: {logradouro}</h2>
+                <h2>Bairro: {bairro}</h2>
+                <h2>Estado: {uf}</h2>
+                <h2>Cidade: {localidade}</h2>
+                <h2>DDD: {ddd}</h2>
+            </AdressData>
         </Container>
     )
 }

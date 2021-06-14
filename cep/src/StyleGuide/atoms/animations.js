@@ -16,8 +16,40 @@ export default `
     opacity: 0;
   }
 }
+@-webkit-keyframes scale-up {
+  0% {
+    -webkit-transform: scaleY(0.4);
+            transform: scaleY(0.4);
+    -webkit-transform-origin: 100% 0%;
+            transform-origin: 100% 0%;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
+            transform-origin: 100% 0%;
+  }
+}
+@keyframes scale-up-ver-top {
+  0% {
+    -webkit-transform: scaleY(0.4);
+            transform: scaleY(0.4);
+    -webkit-transform-origin: 100% 0%;
+            transform-origin: 100% 0%;
+  }
+  100% {
+    -webkit-transform: scaleY(1);
+            transform: scaleY(1);
+    -webkit-transform-origin: 100% 0%;
+            transform-origin: 100% 0%;
+  }
+}
+
 
 `
 export const animation = {
-  rotating:"animation-name: rotating; animation-iteration-count: infinite;animation-duration: 1s;animation-timing-function: linear;"  
+  scaleUp:"-webkit-animation: scale-up-ver-top 1s ;animation: scale-up-ver-top 1s ;",
+  rotating:"animation-name: rotating; animation-iteration-count: infinite;animation-duration: 1s;animation-timing-function: linear;",  
+  ripple:"animation-name: ripple; animation-duration: 1s;"  
+
 }
