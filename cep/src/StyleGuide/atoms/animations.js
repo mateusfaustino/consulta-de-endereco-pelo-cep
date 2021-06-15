@@ -1,4 +1,4 @@
-export default `
+const Animations = `
   @keyframes rotating {
     from {
       transform: rotate(0deg); }
@@ -53,3 +53,4 @@ export const animation = {
   ripple:"animation-name: ripple; animation-duration: 1s;"  
 
 }
+export default Animations

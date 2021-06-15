@@ -46,13 +46,13 @@ const Nav= styled.div`
     
 `
 
-const Navbar = () => {
+const Navbar = (props) => {
     const [isActive,setIsActive]=useState(false);
     return (
         <>
             <Nav icon={isActive? 'close': 'open'}>
                 <Logo isActive={isActive} setIsActive={()=>setIsActive(false)}/>
-                <Menu isActive={isActive} setIsActive={()=>setIsActive(false)}/>
+                <Menu appLinks={props.appLinks} isActive={isActive} setIsActive={()=>setIsActive(false)}/>
                 <MdClose onClick={()=>setIsActive(!isActive)} className='nav__icon nav__close'/>
                 <FaBars onClick={()=>setIsActive(!isActive)} className='nav__icon nav__bars'/>
             </Nav>

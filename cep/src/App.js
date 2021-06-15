@@ -1,4 +1,4 @@
-import Clock from './Pages/Clock'
+import Cep from './Pages/Cep'
 import Navbar from './Components/Header';
 import scroll from './StyleGuide/atoms/scroll';
 import { animation } from './StyleGuide/styles';
@@ -17,17 +17,22 @@ const GlobalStyle = createGlobalStyle`
   ${scroll}
   ${animation}
 `
+const appLinks= {
+  sorce:'https://github.com/mateusfaustino/consulta-de-endereco-pelo-cep',
+  github:'https://github.com/mateusfaustino/',
+  likedin:'https://www.linkedin.com/in/mateus-faustino-021967172/',
+  email:'mailto:mateusfaustino2017@gmail.com'
+  }
 function   App() {
   return (
    <Router>
      <GlobalStyle/>
-     <Navbar/>
+     <Navbar appLinks={appLinks}/>
      <Switch>
        <Route path='/'>
-         <Clock/>
+         <Cep/>
        </Route>
      </Switch>
-     
    </Router>
   );
 }

@@ -11,9 +11,9 @@ const colors = {
 "warning0": '#FFD059',
 "warning1": '#FACD5A',
 
-'danger-1': '#FA708A',
-"danger0": '#FA506F',
-"danger1": '#E54562',
+'danger-1': '#e57373',
+"danger0": '#f44336',
+"danger1": '#d32f2f',
 
 'success-2': '#B2DBC1',
 'success-1': '#2DE072',

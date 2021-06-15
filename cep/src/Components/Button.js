@@ -1,4 +1,3 @@
-import colors from "../StyleGuide/atoms/colors"
 import { color, shadow, border,typography,breakpoint } from "../StyleGuide/styles"
 import styled from "styled-components"
 import { MdSearch } from 'react-icons/md';

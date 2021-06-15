@@ -73,10 +73,10 @@ const Menu = (props) => {
     
  return(
     <Ul  active={props.isActive? true: false} >
-            <li onClick={props.setIsActive}><a  target="_blank" rel="noreferrer"  href='https://github.com/mateusfaustino/digital-clock-in-react' >Código Fonte</a></li>
-            <li onClick={props.setIsActive}><a  target="_blank" rel="noreferrer"  href='https://github.com/mateusfaustino/' >Github</a></li>
-            <li onClick={props.setIsActive}><a  target="_blank" rel="noreferrer"  href='https://www.linkedin.com/in/mateus-faustino-021967172/' >Linkedin</a></li>
-            <li onClick={props.setIsActive}><a  target="_blank" rel="noreferrer"  href='mailto:mateusfaustino2017@gmail.com' >Email</a></li>
+            <li onClick={props.setIsActive}><a  target="_blank" rel="noreferrer"  href={props.appLinks.sorce} >Código Fonte</a></li>
+            <li onClick={props.setIsActive}><a  target="_blank" rel="noreferrer"  href={props.appLinks.github} >Github</a></li>
+            <li onClick={props.setIsActive}><a  target="_blank" rel="noreferrer"  href={props.appLinks.linkedin} >Linkedin</a></li>
+            <li onClick={props.setIsActive}><a  target="_blank" rel="noreferrer"  href={props.appLinks.email}>Email</a></li>
     </Ul>
 )
     

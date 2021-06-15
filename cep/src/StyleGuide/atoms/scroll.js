@@ -1,8 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
 import colors from './colors'
 import border from './borders'
-export default `
+const Scroll = `
 ::-webkit-scrollbar {
     width: 8px;
     border-radius: ${border.border8};
@@ -30,5 +28,4 @@ export default `
     }
 }
 `
-
-  
+export default Scroll

@@ -62,12 +62,29 @@ const Search = styled.div`
         padding:8px;
         border-radius:${border.border8};
         box-shadow: ${shadow};
+        max-width:900px;
         ${anime.scaleUp}
         h2{
             margin-bottom:8px;
             ${typography.paragraph_bold}
         }
         
+    `
+    const ErrorMessage = styled.div`
+        display:${props => props.visible ? 'flex' : 'none' };
+        flex-direction:column;
+        color:${color.dark2};
+        width:100%;
+        padding:8px;
+        border-radius:${border.border8};
+        box-shadow: ${shadow};
+        max-width:900px;
+        background:${color.warning0};
+        ${anime.scaleUp}
+        h2{
+            margin-bottom:8px;
+            ${typography.header_5}
+        }
     `
 export default function SearchByZipCode() {
     var zipCode = ""
@@ -77,6 +94,7 @@ export default function SearchByZipCode() {
     const [localidade,setLocalidade] = useState();
     const [uf,setUf] = useState();
     const [ddd,setDdd] = useState();
+    const [errorState,setError] = useState(false);
     
     const handleZipcode= (zipInputValue) => zipInputValue.replace("-","");
     
@@ -92,25 +110,25 @@ export default function SearchByZipCode() {
             cache:'default'
         }
         const url = `https://viacep.com.br/ws/${getZipcode()}/json/`
-
         return fetch(url, parameters)
-        .then(response => {
-        return response.json()
+        .then(response => response.json()
+        ).then((data) => {
+            setError(false)
+            showData(data)
         })
-        .then((data) => {
-        if (data){
+        .catch((error) => {
+            setError(true)
+            setcep(null)
+        })
+    }
+    const showData = (data)=>{
             setcep(data.cep);
             setLogradouro(data.logradouro);
             setLocalidade(data.localidade);
             setUf(data.uf);
             setBairro(data.bairro);
             setDdd(data.ddd)
-        }
-        })
-        .catch((error) => {
-        })
     }
-    
     return (
         <Container>
             <Search >
@@ -125,6 +143,10 @@ export default function SearchByZipCode() {
                 <h2>Cidade: {localidade}</h2>
                 <h2>DDD: {ddd}</h2>
             </AdressData>
+            <ErrorMessage visible={errorState} >
+                <h2>Atenção! Algo deu errado. Verifique se o cep está correto e tente novamente</h2>
+            </ErrorMessage>
+
         </Container>
     )
 }

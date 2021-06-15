@@ -20,7 +20,7 @@ padding-bottom:32px;
 ${typography.header_2('#fff')}
 `
 
-export default function Clock() {
+export default function Cep() {
     return (
         <Page>
             <Title>Encontre um endereço pelo CEP</Title>
